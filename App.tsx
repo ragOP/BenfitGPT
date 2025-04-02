@@ -8,9 +8,9 @@ const App = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
-      <HomePage />
+      {/* <HomePage /> */}
       {/* <CongratulationsPage /> */}
-      {/* <ChatPage /> */}
+      <ChatPage />
     </SafeAreaView>
   );
 };
