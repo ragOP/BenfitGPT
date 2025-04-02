@@ -117,6 +117,23 @@ const ChatScreen: React.FC = () => {
         setCurrentIndex(currentIndex + 1);
         scrollToBottom();
       }, 3000);
+    } else {
+      setIsTyping(true);
+      setMessages([
+        ...updatedMessages,
+        {type: 'bot', text: 'Bot is typing...'},
+      ]);
+      scrollToBottom();
+
+      setTimeout(() => {
+        setIsTyping(false);
+        setMessages([
+          ...updatedMessages,
+          {type: 'bot', text: 'Thank you for your responses!'},
+        ]);
+        setCurrentIndex(currentIndex + 1);
+        scrollToBottom();
+      }, 3000);
     }
   };
 
@@ -128,6 +145,15 @@ const ChatScreen: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={require('../assets/logo.png')} style={styles.logo} />
+      </View>
+      <View style={styles.subHeader}>
+        <Text style={styles.subHeaderText}>
+          22,578 Seniors Helped In Last 24 Hours!
+        </Text>
+      </View>
+
+      <View style={styles.banner}>
+        <Text style={styles.bannerText}>100% FREE, NO HIDDEN COSTS!</Text>
       </View>
       <ScrollView
         ref={scrollViewRef}
@@ -202,6 +228,32 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     alignItems: 'center',
   },
+  subHeader: {
+    width: '100%',
+    backgroundColor: '#277869',
+    paddingVertical: 5,
+    alignItems: 'center',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  subHeaderText: {
+    color: '#fff',
+    fontSize: 12,
+    marginTop: 1,
+    fontWeight: '600',
+  },
+  banner: {
+    backgroundColor: '#222',
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingRight: 25,
+    paddingLeft: 25,
+    marginVertical: 20,
+    alignItems: 'center',
+    borderRadius: 25,
+    marginHorizontal: 70,
+  },
+  bannerText: {color: '#FFF', fontSize: 12, fontWeight: 'bold'},
   logo: {width: '60%', resizeMode: 'contain'},
   chatContainer: {flexGrow: 1, paddingHorizontal: 20, paddingBottom: 20},
   messageContainerBot: {
@@ -246,7 +298,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: '70%',
   },
-  responseContainer: {alignItems: 'center', flexDirection: 'row', gap: 5},
+  responseContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 5,
+    maxWidth: '80%',
+    flexWrap: 'wrap',
+  },
   button: {
     backgroundColor: '#0FAA53',
     paddingVertical: 5,
@@ -264,6 +322,25 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   typingText: {marginLeft: 10, fontSize: 14, color: '#666'},
+  note: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginVertical: 40,
+    color: '#000',
+    width: '90%',
+    fontWeight: '500',
+  },
+  redText: {color: 'red', fontWeight: 'bold'},
+  warningText: {
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 20,
+    color: 'gray',
+    width: '90%',
+    position: 'absolute',
+    fontWeight: 'bold',
+    bottom: 30,
+  },
 });
 
 export default ChatScreen;
