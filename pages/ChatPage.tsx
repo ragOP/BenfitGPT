@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignItems: 'center',
     borderRadius: 25,
-    marginHorizontal: 70,
+    marginHorizontal: 90,
   },
   bannerText: {color: '#FFF', fontSize: 12, fontWeight: 'bold'},
   logo: {width: '60%', resizeMode: 'contain'},
