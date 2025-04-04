@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  Alert,
 } from 'react-native';
 
 interface Message {
@@ -29,7 +30,7 @@ const questions = [
     id: 5,
     text: 'Do you have any of the following health conditions?',
     type: 'multi',
-    options: ['Alzheimers', 'Diabetes', 'Hypertension', 'Arthritis'],
+    options: ['Alzheimers', 'Diabetes', 'Hypertension', 'Arthritis', 'No'],
   },
   {
     id: 6,
@@ -39,7 +40,7 @@ const questions = [
   },
   {
     id: 7,
-    text: 'Do you drive regularly?',
+    text: 'Do you drive atleast once a week?',
     type: 'choice',
     options: ['Yes', 'No'],
   },
@@ -82,6 +83,13 @@ const ChatScreen: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [inputText, setInputText] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(false);
+  const [isMedicare, setIsMedicare] = useState<boolean>(true);
+  const [isCreditDebt, setIsCreditDebt] = useState<boolean>(true);
+  const [isDiscountedInsurence, setIsDiscountedInsurance] =
+    useState<boolean>(true);
+  const [isComponsation, setIsComponsation] = useState<boolean>(true);
+  const [isACA, setIsACA] = useState<boolean>(true);
+
   const scrollViewRef = useRef<ScrollView>(null);
 
   const scrollToBottom = () => {
@@ -96,6 +104,15 @@ const ChatScreen: React.FC = () => {
     if (!response.trim()) return;
 
     const updatedMessages = [...messages, {type: 'user', text: response}];
+    if(questions[currentIndex].id === 7) {
+      setIsDiscountedInsurance(response === 'Yes');
+    }else if(questions[currentIndex].id === 8) {
+      setIsComponsation(response === 'Yes');
+    }else if(questions[currentIndex].id === 9) {
+      setIsACA(response === 'Yes');
+    }else if(questions[currentIndex].id === 10) {
+      setIsCreditDebt(response === 'Yes');
+    }
     setMessages(updatedMessages);
     setInputText('');
     scrollToBottom();
@@ -131,6 +148,10 @@ const ChatScreen: React.FC = () => {
           ...updatedMessages,
           {type: 'bot', text: 'Thank you for your responses!'},
         ]);
+        Alert.alert(
+          'Summary',
+          `Credit Debt: ${isCreditDebt}, Discounted Insurance: ${isDiscountedInsurence}, Compensation: ${isComponsation}, ACA: ${isACA}`
+        );
         setCurrentIndex(currentIndex + 1);
         scrollToBottom();
       }, 3000);

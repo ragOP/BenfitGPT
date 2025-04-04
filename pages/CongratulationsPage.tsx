@@ -29,33 +29,161 @@ const CongratulationsPage = () => {
         <Text style={styles.subText}>Go one by one!</Text>
       </View>
 
-      <View style={styles.redBanner}>
-        <Text style={styles.redBannerText}>Easiest To Claim</Text>
-      </View>
+      <>
+        <View style={styles.redBanner}>
+          <Text style={styles.redBannerText}>Easiest To Claim</Text>
+        </View>
 
-      <View style={styles.cardContainer}>
-        <Text style={styles.cardTitle}>
-          1. <Text style={styles.boldText}>Food Allowance Card</Text>
-        </Text>
-        <Image
-          source={require('../assets/benifit1.jpeg')}
-          style={styles.cardImage}
-        />
-        <Text style={styles.cardDescription}>
-          This food allowance card gives you{' '}
-          <Text style={styles.greenText}>thousands of dollars</Text> a year to
-          spend on groceries, rent, prescriptions, etc.
-        </Text>
-        <Text style={styles.instructionText}>
-          Simply click below & call now to claim
-        </Text>
-        <TouchableOpacity style={styles.callButton}>
-          <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
-        </TouchableOpacity>
-        <Text style={styles.note}>
-          *Takes <Text style={styles.boldText}>couple minutes</Text> on average
-        </Text>
-      </View>
+        <View style={styles.cardContainer}>
+          <Text style={styles.cardTitle}>
+            <Text style={styles.boldText}>Food Allowance Card</Text>
+          </Text>
+          <Image
+            source={require('../assets/benifit1.jpeg')}
+            style={styles.cardImage}
+          />
+          <Text style={styles.cardDescription}>
+            This food allowance card gives you{' '}
+            <Text style={styles.greenText}>thousands of dollars</Text> a year to
+            spend on groceries, rent, prescriptions, etc.
+          </Text>
+          <Text style={styles.instructionText}>
+            Simply click below & call now to claim
+          </Text>
+          <TouchableOpacity style={styles.callButton}>
+            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+          </TouchableOpacity>
+          <Text style={styles.note}>
+            *Takes <Text style={styles.boldText}>couple minutes</Text> on
+            average
+          </Text>
+        </View>
+      </>
+
+      <>
+        <View style={styles.redBanner}>
+          <Text style={styles.redBannerText}>Easiest To Claim</Text>
+        </View>
+
+        <View style={styles.cardContainer}>
+          <Text style={styles.cardTitle}>
+            <Text style={styles.boldText}>CREDIT CARD DEBT RELIEF</Text>
+          </Text>
+          <Image
+            source={require('../assets/benifit2.jpeg')}
+            style={styles.cardImage}
+          />
+          <Text style={styles.cardDescription}>
+            Aman, You're qualified to claim 100% Debt Relief by end of today
+            <Text style={styles.greenText}>(RARE)</Text>
+          </Text>
+          <Text style={styles.instructionText}>
+            Simply click below & call now to claim
+          </Text>
+          <TouchableOpacity style={styles.callButton}>
+            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+          </TouchableOpacity>
+          <Text style={styles.note}>
+            *Takes <Text style={styles.boldText}>couple minutes</Text> on
+            average
+          </Text>
+        </View>
+      </>
+
+      <>
+        <View style={styles.redBanner}>
+          <Text style={styles.redBannerText}>Easiest To Claim</Text>
+        </View>
+
+        <View style={styles.cardContainer}>
+          <Text style={styles.cardTitle}>
+            <Text style={styles.boldText}>Discounted Auto Insurance Plan</Text>
+          </Text>
+          <Image
+            source={require('../assets/benifit3.jpeg')}
+            style={styles.cardImage}
+          />
+          <Text style={styles.cardDescription}>
+            Aman, You're <Text style={styles.greenText}>eligible</Text> for a
+            "Discounted Auto Insurance Plan" with all the coverages.
+          </Text>
+          <Text style={styles.instructionText}>
+            Simply click below & call now to claim
+          </Text>
+          <TouchableOpacity style={styles.callButton}>
+            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+          </TouchableOpacity>
+          <Text style={styles.note}>
+            *Takes <Text style={styles.boldText}>couple minutes</Text> on
+            average
+          </Text>
+        </View>
+      </>
+
+      <>
+        <View style={styles.redBanner}>
+          <Text style={styles.redBannerText}>Easiest To Claim</Text>
+        </View>
+
+        <View style={styles.cardContainer}>
+          <Text style={styles.cardTitle}>
+            <Text style={styles.boldText}>
+              GET HIGHER COMPENSATION FOR YOUR ACCIDENT.
+            </Text>
+          </Text>
+          <Image
+            source={require('../assets/benifit4.jpeg')}
+            style={styles.cardImage}
+          />
+          <Text style={styles.cardDescription}>
+            Based on your answers, you might be eligible for a
+            <Text style={styles.greenText}>higher compensation</Text> on your
+            accident. (Most people get <Text style={styles.greenText}>3x</Text>{' '}
+            of their past compensations)
+          </Text>
+          <Text style={styles.instructionText}>
+            Simply click below & call now to claim
+          </Text>
+          <TouchableOpacity style={styles.callButton}>
+            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+          </TouchableOpacity>
+          <Text style={styles.note}>
+            *Takes <Text style={styles.boldText}>couple minutes</Text> on
+            average
+          </Text>
+        </View>
+      </>
+
+      <>
+        <View style={styles.redBanner}>
+          <Text style={styles.redBannerText}>Easiest To Claim</Text>
+        </View>
+
+        <View style={styles.cardContainer}>
+          <Text style={styles.cardTitle}>
+            <Text style={styles.boldText}>ACA</Text>
+          </Text>
+          <Image
+            source={require('../assets/benifit1.jpeg')}
+            style={styles.cardImage}
+          />
+          <Text style={styles.cardDescription}>
+            This food allowance card gives you{' '}
+            <Text style={styles.greenText}>thousands of dollars</Text> a year to
+            spend on groceries, rent, prescriptions, etc.
+          </Text>
+          <Text style={styles.instructionText}>
+            Simply click below & call now to claim
+          </Text>
+          <TouchableOpacity style={styles.callButton}>
+            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+          </TouchableOpacity>
+          <Text style={styles.note}>
+            *Takes <Text style={styles.boldText}>couple minutes</Text> on
+            average
+          </Text>
+        </View>
+      </>
 
       <Text style={styles.warningText}>
         Beware of other fraudulent & similar looking websites that might look
@@ -72,7 +200,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#277869',
     alignItems: 'center',
     paddingBottom: 20,
-    height: '100%',
   },
   header: {
     width: '100%',
@@ -132,8 +259,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardTitle: {fontSize: 26, color: '#000', marginBottom: 10},
-  boldText: {fontWeight: 'bold'},
-  cardImage: {width: 200, height: 150, resizeMode: 'contain', marginBottom: 15},
+  boldText: {fontWeight: 'bold', textAlign: 'center'},
+  cardImage: {width: 200, height: 150, resizeMode: 'contain', marginBottom: 15, borderRadius: 20},
   cardDescription: {fontSize: 16, color: '#000', textAlign: 'center'},
   greenText: {color: '#559c5a', fontWeight: 'bold'},
   instructionText: {fontSize: 16, marginVertical: 10, color: '#000'},
