@@ -6,192 +6,224 @@ import {
   Image,
   StyleSheet,
   ScrollView,
+  StatusBar,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
-const CongratulationsPage = () => {
+const CongratulationsPage = ({route}) => {
+  const {
+    isMedicare,
+    isCreditDebt,
+    isDiscountedInsurence,
+    isComponsation,
+    isACA,
+  } = route.params;
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-      </View>
-      <View style={styles.subHeader}>
-        <Text style={styles.subHeaderText}>
-          22,578 Seniors Helped In Last 24 Hours!
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.header}>
+          <Image source={require('../assets/logo.png')} style={styles.logo} />
+        </View>
+        <View style={styles.subHeader}>
+          <Text style={styles.subHeaderText}>
+            22,578 Seniors Helped In Last 24 Hours!
+          </Text>
+        </View>
+
+        <View style={styles.greenContainer}>
+          <Text style={styles.congratsText}>Congratulations, Aman Dev!</Text>
+          <Text style={styles.benefitText}>
+            Here are the <Text style={styles.highlightText}>5</Text> Benefits
+            You Qualify
+          </Text>
+          <Text style={styles.subText}>Go one by one!</Text>
+        </View>
+
+        {isMedicare && (
+          <>
+            <View style={styles.redBanner}>
+              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+            </View>
+
+            <View style={styles.cardContainer}>
+              <Text style={styles.cardTitle}>
+                <Text style={styles.boldText}>Food Allowance Card</Text>
+              </Text>
+              <Image
+                source={require('../assets/benifit1.jpeg')}
+                style={styles.cardImage}
+              />
+              <Text style={styles.cardDescription}>
+                This food allowance card gives you{' '}
+                <Text style={styles.greenText}>thousands of dollars</Text> a
+                year to spend on groceries, rent, prescriptions, etc.
+              </Text>
+              <Text style={styles.instructionText}>
+                Simply click below & call now to claim
+              </Text>
+              <TouchableOpacity style={styles.callButton}>
+                <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+              </TouchableOpacity>
+              <Text style={styles.note}>
+                *Takes <Text style={styles.boldText}>couple minutes</Text> on
+                average
+              </Text>
+            </View>
+          </>
+        )}
+
+        {isCreditDebt && (
+          <>
+            <View style={styles.redBanner}>
+              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+            </View>
+
+            <View style={styles.cardContainer}>
+              <Text style={styles.cardTitle}>
+                <Text style={styles.boldText}>CREDIT CARD DEBT RELIEF</Text>
+              </Text>
+              <Image
+                source={require('../assets/benifit2.jpeg')}
+                style={styles.cardImage}
+              />
+              <Text style={styles.cardDescription}>
+                Aman, You're qualified to claim 100% Debt Relief by end of today
+                <Text style={styles.greenText}>(RARE)</Text>
+              </Text>
+              <Text style={styles.instructionText}>
+                Simply click below & call now to claim
+              </Text>
+              <TouchableOpacity style={styles.callButton}>
+                <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+              </TouchableOpacity>
+              <Text style={styles.note}>
+                *Takes <Text style={styles.boldText}>couple minutes</Text> on
+                average
+              </Text>
+            </View>
+          </>
+        )}
+
+        {isDiscountedInsurence && (
+          <>
+            <View style={styles.redBanner}>
+              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+            </View>
+
+            <View style={styles.cardContainer}>
+              <Text style={styles.cardTitle}>
+                <Text style={styles.boldText}>
+                  Discounted Auto Insurance Plan
+                </Text>
+              </Text>
+              <Image
+                source={require('../assets/benifit3.jpeg')}
+                style={styles.cardImage}
+              />
+              <Text style={styles.cardDescription}>
+                Aman, You're <Text style={styles.greenText}>eligible</Text> for
+                a "Discounted Auto Insurance Plan" with all the coverages.
+              </Text>
+              <Text style={styles.instructionText}>
+                Simply click below & call now to claim
+              </Text>
+              <TouchableOpacity style={styles.callButton}>
+                <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+              </TouchableOpacity>
+              <Text style={styles.note}>
+                *Takes <Text style={styles.boldText}>couple minutes</Text> on
+                average
+              </Text>
+            </View>
+          </>
+        )}
+
+        {isComponsation && (
+          <>
+            <View style={styles.redBanner}>
+              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+            </View>
+
+            <View style={styles.cardContainer}>
+              <Text style={styles.cardTitle}>
+                <Text style={styles.boldText}>
+                  GET HIGHER COMPENSATION FOR YOUR ACCIDENT.
+                </Text>
+              </Text>
+              <Image
+                source={require('../assets/benifit4.jpeg')}
+                style={styles.cardImage}
+              />
+              <Text style={styles.cardDescription}>
+                Based on your answers, you might be eligible for a
+                <Text style={styles.greenText}>higher compensation</Text> on
+                your accident. (Most people get{' '}
+                <Text style={styles.greenText}>3x</Text> of their past
+                compensations)
+              </Text>
+              <Text style={styles.instructionText}>
+                Simply click below & call now to claim
+              </Text>
+              <TouchableOpacity style={styles.callButton}>
+                <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+              </TouchableOpacity>
+              <Text style={styles.note}>
+                *Takes <Text style={styles.boldText}>couple minutes</Text> on
+                average
+              </Text>
+            </View>
+          </>
+        )}
+
+        {isACA && (
+          <>
+            <View style={styles.redBanner}>
+              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+            </View>
+
+            <View style={styles.cardContainer}>
+              <Text style={styles.cardTitle}>
+                <Text style={styles.boldText}>ACA</Text>
+              </Text>
+              <Image
+                source={require('../assets/benifit1.jpeg')}
+                style={styles.cardImage}
+              />
+              <Text style={styles.cardDescription}>
+                This food allowance card gives you{' '}
+                <Text style={styles.greenText}>thousands of dollars</Text> a
+                year to spend on groceries, rent, prescriptions, etc.
+              </Text>
+              <Text style={styles.instructionText}>
+                Simply click below & call now to claim
+              </Text>
+              <TouchableOpacity style={styles.callButton}>
+                <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
+              </TouchableOpacity>
+              <Text style={styles.note}>
+                *Takes <Text style={styles.boldText}>couple minutes</Text> on
+                average
+              </Text>
+            </View>
+          </>
+        )}
+
+        <Text style={styles.warningText}>
+          Beware of other fraudulent & similar looking websites that might look
+          exactly like ours, we have no affiliation with them. This is the only
+          official website to claim your Burial Protection Plan with the domain
+          name burialprotectionplan.org.
         </Text>
-      </View>
-
-      <View style={styles.greenContainer}>
-        <Text style={styles.congratsText}>Congratulations, Aman Dev!</Text>
-        <Text style={styles.benefitText}>
-          Here are the <Text style={styles.highlightText}>5</Text> Benefits You
-          Qualify
-        </Text>
-        <Text style={styles.subText}>Go one by one!</Text>
-      </View>
-
-      <>
-        <View style={styles.redBanner}>
-          <Text style={styles.redBannerText}>Easiest To Claim</Text>
-        </View>
-
-        <View style={styles.cardContainer}>
-          <Text style={styles.cardTitle}>
-            <Text style={styles.boldText}>Food Allowance Card</Text>
-          </Text>
-          <Image
-            source={require('../assets/benifit1.jpeg')}
-            style={styles.cardImage}
-          />
-          <Text style={styles.cardDescription}>
-            This food allowance card gives you{' '}
-            <Text style={styles.greenText}>thousands of dollars</Text> a year to
-            spend on groceries, rent, prescriptions, etc.
-          </Text>
-          <Text style={styles.instructionText}>
-            Simply click below & call now to claim
-          </Text>
-          <TouchableOpacity style={styles.callButton}>
-            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
-          </TouchableOpacity>
-          <Text style={styles.note}>
-            *Takes <Text style={styles.boldText}>couple minutes</Text> on
-            average
-          </Text>
-        </View>
-      </>
-
-      <>
-        <View style={styles.redBanner}>
-          <Text style={styles.redBannerText}>Easiest To Claim</Text>
-        </View>
-
-        <View style={styles.cardContainer}>
-          <Text style={styles.cardTitle}>
-            <Text style={styles.boldText}>CREDIT CARD DEBT RELIEF</Text>
-          </Text>
-          <Image
-            source={require('../assets/benifit2.jpeg')}
-            style={styles.cardImage}
-          />
-          <Text style={styles.cardDescription}>
-            Aman, You're qualified to claim 100% Debt Relief by end of today
-            <Text style={styles.greenText}>(RARE)</Text>
-          </Text>
-          <Text style={styles.instructionText}>
-            Simply click below & call now to claim
-          </Text>
-          <TouchableOpacity style={styles.callButton}>
-            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
-          </TouchableOpacity>
-          <Text style={styles.note}>
-            *Takes <Text style={styles.boldText}>couple minutes</Text> on
-            average
-          </Text>
-        </View>
-      </>
-
-      <>
-        <View style={styles.redBanner}>
-          <Text style={styles.redBannerText}>Easiest To Claim</Text>
-        </View>
-
-        <View style={styles.cardContainer}>
-          <Text style={styles.cardTitle}>
-            <Text style={styles.boldText}>Discounted Auto Insurance Plan</Text>
-          </Text>
-          <Image
-            source={require('../assets/benifit3.jpeg')}
-            style={styles.cardImage}
-          />
-          <Text style={styles.cardDescription}>
-            Aman, You're <Text style={styles.greenText}>eligible</Text> for a
-            "Discounted Auto Insurance Plan" with all the coverages.
-          </Text>
-          <Text style={styles.instructionText}>
-            Simply click below & call now to claim
-          </Text>
-          <TouchableOpacity style={styles.callButton}>
-            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
-          </TouchableOpacity>
-          <Text style={styles.note}>
-            *Takes <Text style={styles.boldText}>couple minutes</Text> on
-            average
-          </Text>
-        </View>
-      </>
-
-      <>
-        <View style={styles.redBanner}>
-          <Text style={styles.redBannerText}>Easiest To Claim</Text>
-        </View>
-
-        <View style={styles.cardContainer}>
-          <Text style={styles.cardTitle}>
-            <Text style={styles.boldText}>
-              GET HIGHER COMPENSATION FOR YOUR ACCIDENT.
-            </Text>
-          </Text>
-          <Image
-            source={require('../assets/benifit4.jpeg')}
-            style={styles.cardImage}
-          />
-          <Text style={styles.cardDescription}>
-            Based on your answers, you might be eligible for a
-            <Text style={styles.greenText}>higher compensation</Text> on your
-            accident. (Most people get <Text style={styles.greenText}>3x</Text>{' '}
-            of their past compensations)
-          </Text>
-          <Text style={styles.instructionText}>
-            Simply click below & call now to claim
-          </Text>
-          <TouchableOpacity style={styles.callButton}>
-            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
-          </TouchableOpacity>
-          <Text style={styles.note}>
-            *Takes <Text style={styles.boldText}>couple minutes</Text> on
-            average
-          </Text>
-        </View>
-      </>
-
-      <>
-        <View style={styles.redBanner}>
-          <Text style={styles.redBannerText}>Easiest To Claim</Text>
-        </View>
-
-        <View style={styles.cardContainer}>
-          <Text style={styles.cardTitle}>
-            <Text style={styles.boldText}>ACA</Text>
-          </Text>
-          <Image
-            source={require('../assets/benifit1.jpeg')}
-            style={styles.cardImage}
-          />
-          <Text style={styles.cardDescription}>
-            This food allowance card gives you{' '}
-            <Text style={styles.greenText}>thousands of dollars</Text> a year to
-            spend on groceries, rent, prescriptions, etc.
-          </Text>
-          <Text style={styles.instructionText}>
-            Simply click below & call now to claim
-          </Text>
-          <TouchableOpacity style={styles.callButton}>
-            <Text style={styles.callButtonText}>CALL (XXX) XXX-XXXX</Text>
-          </TouchableOpacity>
-          <Text style={styles.note}>
-            *Takes <Text style={styles.boldText}>couple minutes</Text> on
-            average
-          </Text>
-        </View>
-      </>
-
-      <Text style={styles.warningText}>
-        Beware of other fraudulent & similar looking websites that might look
-        exactly like ours, we have no affiliation with them. This is the only
-        official website to claim your Burial Protection Plan with the domain
-        name burialprotectionplan.org.
-      </Text>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -260,7 +292,13 @@ const styles = StyleSheet.create({
   },
   cardTitle: {fontSize: 26, color: '#000', marginBottom: 10},
   boldText: {fontWeight: 'bold', textAlign: 'center'},
-  cardImage: {width: 200, height: 150, resizeMode: 'contain', marginBottom: 15, borderRadius: 20},
+  cardImage: {
+    width: 200,
+    height: 150,
+    resizeMode: 'contain',
+    marginBottom: 15,
+    borderRadius: 20,
+  },
   cardDescription: {fontSize: 16, color: '#000', textAlign: 'center'},
   greenText: {color: '#559c5a', fontWeight: 'bold'},
   instructionText: {fontSize: 16, marginVertical: 10, color: '#000'},

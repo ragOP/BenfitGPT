@@ -6,10 +6,13 @@ import {
   StyleSheet,
   ScrollView,
   Image,
+  StatusBar,
+  Platform,
 } from 'react-native';
 import Loader from '../components/Loader';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
-const HomePage = () => {
+const HomePage = ({navigation}) => {
   const [peopleNumber, setPeopleNumber] = useState(69);
   const [showLoading, setShowLoading] = useState(false);
 
@@ -19,8 +22,8 @@ const HomePage = () => {
     }, 1000);
     setTimeout(() => {
       setShowLoading(false);
-    }, 8000);
-    // TODO:  Need to navigate the user to the chatscreen.
+      navigation.navigate('ChatPage');
+    }, 4000);
   };
 
   useEffect(() => {
@@ -32,94 +35,101 @@ const HomePage = () => {
     return () => clearInterval(intervalId);
   }, []);
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <Image
-          source={require('../assets/logo.png')}
-          style={styles.logo}
-        />
-      </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
+      <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.header}>
+          <Image source={require('../assets/logo.png')} style={styles.logo} />
+        </View>
 
-      <View style={styles.subHeader}>
-        <Text style={styles.subHeaderText}>
-          22,578 Seniors Helped In Last 24 Hours!
+        <View style={styles.subHeader}>
+          <Text style={styles.subHeaderText}>
+            22,578 Seniors Helped In Last 24 Hours!
+          </Text>
+        </View>
+
+        <View style={styles.banner}>
+          <Text style={styles.bannerText}>100% FREE, NO HIDDEN COSTS!</Text>
+        </View>
+
+        {!showLoading && (
+          <View style={styles.row}>
+            <Text style={styles.title}>
+              Seniors, Get Your Free Benefits Check in Just 60 Seconds!
+            </Text>
+
+            <View style={styles.listContainer}>
+              <View style={styles.listImageContainer}>
+                <Image
+                  source={require('../assets/Tick.jpeg')}
+                  style={styles.tickImage}
+                />
+                <Text style={styles.listItem}>
+                  Over 2M+ Seniors Helped Till Date.
+                </Text>
+              </View>
+              <View style={styles.listImageContainer}>
+                <Image
+                  source={require('../assets/Tick.jpeg')}
+                  style={styles.tickImage}
+                />
+                <Text style={styles.listItem}>Completely Free & Easy.</Text>
+              </View>
+              <View style={styles.listImageContainer}>
+                <Image
+                  source={require('../assets/Tick.jpeg')}
+                  style={styles.tickImage}
+                />
+                <Text style={styles.listItem}>
+                  Specially Made For Seniors Over 65!
+                </Text>
+              </View>
+            </View>
+
+            <TouchableOpacity onPress={handleStartNow} style={styles.button}>
+              <Text style={styles.buttonText}>START NOW ➤</Text>
+            </TouchableOpacity>
+            <Text style={styles.claimText}>
+              <Text style={styles.greenText}>{peopleNumber}</Text> People Are{' '}
+              <Text style={styles.boldText}>Claiming</Text> Right Now!
+            </Text>
+            <View style={styles.aiImageContainer}>
+              <Image
+                source={require('../assets/Loader.jpeg')}
+                style={styles.aiImage}
+              />
+              <Text style={styles.aiText}>Activating AI</Text>
+            </View>
+          </View>
+        )}
+
+        {showLoading && (
+          <View style={styles.loader}>
+            <Loader />
+          </View>
+        )}
+
+        <Text style={styles.note}>
+          <Text style={styles.redText}>NOTE:</Text> We don’t spam OR sell
+          information & we aren’t affiliated with any gov. branch. We are not
+          sponsored by any External Private Organisation.
         </Text>
-      </View>
 
-      <View style={styles.banner}>
-        <Text style={styles.bannerText}>100% FREE, NO HIDDEN COSTS!</Text>
-      </View>
-
-      {!showLoading && (
-        <View style={styles.row}>
-          <Text style={styles.title}>
-            Seniors, Get Your Free Benefits Check in Just 60 Seconds!
-          </Text>
-
-          <View style={styles.listContainer}>
-            <View style={styles.listImageContainer}>
-              <Image
-                source={require('../assets/Tick.jpeg')}
-                style={styles.tickImage}
-              />
-              <Text style={styles.listItem}>
-                Over 2M+ Seniors Helped Till Date.
-              </Text>
-            </View>
-            <View style={styles.listImageContainer}>
-              <Image
-                source={require('../assets/Tick.jpeg')}
-                style={styles.tickImage}
-              />
-              <Text style={styles.listItem}>Completely Free & Easy.</Text>
-            </View>
-            <View style={styles.listImageContainer}>
-              <Image
-                source={require('../assets/Tick.jpeg')}
-                style={styles.tickImage}
-              />
-              <Text style={styles.listItem}>
-                Specially Made For Seniors Over 65!
-              </Text>
-            </View>
-          </View>
-
-          <TouchableOpacity onPress={handleStartNow} style={styles.button}>
-            <Text style={styles.buttonText}>START NOW ➤</Text>
-          </TouchableOpacity>
-          <Text style={styles.claimText}>
-            <Text style={styles.greenText}>{peopleNumber}</Text> People Are{' '}
-            <Text style={styles.boldText}>Claiming</Text> Right Now!
-          </Text>
-          <View style={styles.aiImageContainer}>
-            <Image
-              source={require('../assets/Loader.jpeg')}
-              style={styles.aiImage}
-            />
-            <Text style={styles.aiText}>Activating AI</Text>
-          </View>
-        </View>
-      )}
-
-      {showLoading && (
-        <View style={styles.loader}>
-          <Loader />
-        </View>
-      )}
-
-      <Text style={styles.note}>
-        <Text style={styles.redText}>NOTE:</Text> We don’t spam OR sell
-        information & we aren’t affiliated with any gov. branch. We are not
-        sponsored by any External Private Organisation.
-      </Text>
-
-      <Text style={styles.warningText}>
-        Beware of other fraudulent & similar looking websites that might look
-        exactly like ours, we have no affiliation with them. This is the only
-        official website to claim your Burial Protection Plan with the domain
-        name burialprotectionplan.org.
-      </Text>
-    </ScrollView>
+        <Text style={styles.warningText}>
+          Beware of other fraudulent & similar looking websites that might look
+          exactly like ours, we have no affiliation with them. This is the only
+          official website to claim your Burial Protection Plan with the domain
+          name burialprotectionplan.org.
+        </Text>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

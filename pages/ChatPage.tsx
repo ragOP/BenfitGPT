@@ -8,7 +8,10 @@ import {
   TouchableOpacity,
   Image,
   Alert,
+  StatusBar,
+  Platform,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 interface Message {
   type: 'bot' | 'user' | 'typing';
@@ -17,14 +20,14 @@ interface Message {
 
 const questions = [
   {
-    id: 1,
+    id: 0,
     text: "Let's Kick off the conversation",
     type: 'choice',
     options: ['Start'],
   },
-  {id: 1, text: "What's your Full Name?", type: 'text'},
-  {id: 2, text: "What's your Running Age?", type: 'text'},
-  {id: 3, text: "What's your zipcode?", type: 'text'},
+  {id: 1, text: "What's your Full Name?", type: 'text', keyType: 'alphabet'},
+  {id: 2, text: "What's your Running Age?", type: 'text', keyType: 'alphabet'},
+  {id: 3, text: "What's your zipcode?", type: 'text', keyType: 'numeric'},
   {id: 4, text: 'Are you on Medicare?', type: 'choice', options: ['Yes', 'No']},
   {
     id: 5,
@@ -76,7 +79,7 @@ const questions = [
   },
 ];
 
-const ChatScreen: React.FC = () => {
+const ChatScreen: React.FC = ({navigation}) => {
   const [messages, setMessages] = useState<Message[]>([
     {type: 'bot', text: questions[0].text},
   ]);
@@ -104,13 +107,13 @@ const ChatScreen: React.FC = () => {
     if (!response.trim()) return;
 
     const updatedMessages = [...messages, {type: 'user', text: response}];
-    if(questions[currentIndex].id === 7) {
+    if (questions[currentIndex].id === 7) {
       setIsDiscountedInsurance(response === 'Yes');
-    }else if(questions[currentIndex].id === 8) {
+    } else if (questions[currentIndex].id === 8) {
       setIsComponsation(response === 'Yes');
-    }else if(questions[currentIndex].id === 9) {
+    } else if (questions[currentIndex].id === 9) {
       setIsACA(response === 'Yes');
-    }else if(questions[currentIndex].id === 10) {
+    } else if (questions[currentIndex].id === 10) {
       setIsCreditDebt(response === 'Yes');
     }
     setMessages(updatedMessages);
@@ -148,9 +151,16 @@ const ChatScreen: React.FC = () => {
           ...updatedMessages,
           {type: 'bot', text: 'Thank you for your responses!'},
         ]);
+        navigation.navigate('CongratulationsPage', {
+          isMedicare,
+          isCreditDebt,
+          isDiscountedInsurence,
+          isComponsation,
+          isACA,
+        });
         Alert.alert(
           'Summary',
-          `Credit Debt: ${isCreditDebt}, Discounted Insurance: ${isDiscountedInsurence}, Compensation: ${isComponsation}, ACA: ${isACA}`
+          `Credit Debt: ${isCreditDebt}, Discounted Insurance: ${isDiscountedInsurence}, Compensation: ${isComponsation}, ACA: ${isACA}`,
         );
         setCurrentIndex(currentIndex + 1);
         scrollToBottom();
@@ -163,81 +173,112 @@ const ChatScreen: React.FC = () => {
   }, [messages]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Image source={require('../assets/logo.png')} style={styles.logo} />
-      </View>
-      <View style={styles.subHeader}>
-        <Text style={styles.subHeaderText}>
-          22,578 Seniors Helped In Last 24 Hours!
-        </Text>
-      </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Image source={require('../assets/logo.png')} style={styles.logo} />
+        </View>
+        <View style={styles.subHeader}>
+          <Text style={styles.subHeaderText}>
+            22,578 Seniors Helped In Last 24 Hours!
+          </Text>
+        </View>
 
-      <View style={styles.banner}>
-        <Text style={styles.bannerText}>100% FREE, NO HIDDEN COSTS!</Text>
-      </View>
-      <ScrollView
-        ref={scrollViewRef}
-        contentContainerStyle={styles.chatContainer}>
-        {messages.map((msg, index) => (
-          <View
-            key={index}
-            style={
-              msg.type === 'bot'
-                ? styles.messageContainerBot
-                : styles.messageContainerUser
-            }>
-            {msg.type === 'bot' && (
-              <Image
-                source={require('../assets/bot.png')}
-                style={styles.icon}
-              />
-            )}
+        <View style={styles.banner}>
+          <Text style={styles.bannerText}>100% FREE, NO HIDDEN COSTS!</Text>
+        </View>
+        <ScrollView
+          ref={scrollViewRef}
+          contentContainerStyle={styles.chatContainer}>
+          {messages.map((msg, index) => (
             <View
+              key={index}
               style={
                 msg.type === 'bot'
-                  ? styles.botMessageContainer
-                  : styles.userMessageContainer
+                  ? styles.messageContainerBot
+                  : styles.messageContainerUser
               }>
-              <Text
+              {msg.type === 'bot' && (
+                <Image
+                  source={require('../assets/bot.png')}
+                  style={styles.icon}
+                />
+              )}
+              <View
                 style={
                   msg.type === 'bot'
-                    ? styles.messageTextBot
-                    : styles.messageTextUser
+                    ? styles.botMessageContainer
+                    : styles.userMessageContainer
                 }>
-                {msg.text}
-              </Text>
-            </View>
-          </View>
-        ))}
-        {!isTyping && currentIndex < questions.length && (
-          <View style={styles.inputContainer}>
-            {questions[currentIndex].type === 'text' ? (
-              <TextInput
-                style={styles.input}
-                value={inputText}
-                onChangeText={setInputText}
-                onSubmitEditing={() => handleResponse(inputText)}
-                placeholder="Type your response..."
-                returnKeyType="send"
-              />
-            ) : (
-              <View style={styles.responseContainer}>
-                {questions[currentIndex].options?.map(option => (
-                  <TouchableOpacity
-                    key={option}
-                    style={styles.button}
-                    onPress={() => handleResponse(option)}>
-                    <Text style={styles.buttonText}>{option}</Text>
-                  </TouchableOpacity>
-                ))}
-                {/* <Text style={styles.noteChat}>*Takes 2 minutes on average</Text> */}
+                <Text
+                  style={
+                    msg.type === 'bot'
+                      ? styles.messageTextBot
+                      : styles.messageTextUser
+                  }>
+                  {msg.text}
+                </Text>
               </View>
-            )}
-          </View>
-        )}
-      </ScrollView>
-    </View>
+            </View>
+          ))}
+          {!isTyping && currentIndex < questions.length && (
+            <View style={styles.inputContainer}>
+              {questions[currentIndex].type === 'text' ? (
+                <View style={styles.typingContainer}>
+                  <TextInput
+                    style={styles.input}
+                    value={inputText}
+                    onChangeText={setInputText}
+                    onSubmitEditing={() => handleResponse(inputText)}
+                    placeholder="Type your response..."
+                    returnKeyType="send"
+                    keyboardType={
+                      questions[currentIndex].keyType === 'numeric'
+                        ? 'numeric'
+                        : 'default'
+                    }
+                  />
+
+                  <TouchableOpacity
+                    style={styles.sendButton}
+                    onPress={() => {
+                      if (inputText.trim()) {
+                        handleResponse(inputText);
+                        setInputText('');
+                      }
+                    }}>
+                    <Image
+                      source={require('../assets/sendBtn.webp')}
+                      style={styles.sendBtnImg}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ) : (
+                <View style={styles.responseContainer}>
+                  {questions[currentIndex].options?.map(option => (
+                    <TouchableOpacity
+                      key={option}
+                      style={styles.button}
+                      onPress={() => handleResponse(option)}>
+                      <Text style={styles.buttonText}>{option}</Text>
+                    </TouchableOpacity>
+                  ))}
+                  {/* <Text style={styles.noteChat}>*Takes 2 minutes on average</Text> */}
+                </View>
+              )}
+            </View>
+          )}
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -276,6 +317,7 @@ const styles = StyleSheet.create({
   },
   bannerText: {color: '#FFF', fontSize: 12, fontWeight: 'bold'},
   logo: {width: '60%', resizeMode: 'contain'},
+  sendBtnImg: {width: 40, height: 40},
   chatContainer: {flexGrow: 1, paddingHorizontal: 20, paddingBottom: 20},
   messageContainerBot: {
     flexDirection: 'row',
@@ -290,6 +332,11 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     alignSelf: 'flex-end',
     maxWidth: '85%',
+  },
+  sendButton: {
+    borderRadius: 20,
+    width: 70,
+    marginLeft: 10,
   },
   botMessageContainer: {
     backgroundColor: '#FFF',

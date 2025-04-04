@@ -1,26 +1,37 @@
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import React from 'react';
+import {StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from 'react-native-screens/native-stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+
 import HomePage from './pages/HomePage';
 import CongratulationsPage from './pages/CongratulationsPage';
 import ChatPage from './pages/ChatPage';
 
+const Stack = createNativeStackNavigator();
+
 const App = () => {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent />
-      <HomePage />
-      {/* <CongratulationsPage />
-      <ChatPage /> */}
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomePage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChatPage"
+          component={ChatPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CongratulationsPage"
+          component={CongratulationsPage}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
 export default App;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-  },
-});
