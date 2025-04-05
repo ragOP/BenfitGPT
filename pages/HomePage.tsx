@@ -11,14 +11,59 @@ import {
 } from 'react-native';
 import Loader from '../components/Loader';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomePage = ({navigation}) => {
   const [peopleNumber, setPeopleNumber] = useState(69);
   const [showLoading, setShowLoading] = useState(false);
-  const [uuid, setUuid] = useState<string>('');
+  const [uuid, setUuid] = useState<any>();
+  const [isAlreadyQualified, setIsAlreadyQualified] = useState(false);
+  const [userData, setUserData] = useState({
+    isMedicare: '',
+    isCreditDebt: '',
+    isDiscountedInsurence: '',
+    isComponsation: '',
+    isACA: '',
+    name: '',
+  });
 
   const generateUniqueId = () => {
-    return Date.now().toString() + Math.floor(Math.random() * 1000000).toString();
+    return (
+      Date.now().toString() + Math.floor(Math.random() * 1000000).toString()
+    );
+  };
+
+  const storeUuid = async () => {
+    try {
+      const existingId = await AsyncStorage.getItem('uniqueUserId');
+
+      if (!existingId) {
+        const randomUuid = generateUniqueId();
+        await AsyncStorage.setItem('uniqueUserId', randomUuid);
+        setUuid(randomUuid);
+      } else {
+        setUuid(existingId);
+
+        const response = await fetch(
+          `http://10.0.2.2:5000/api/messages/${existingId}`,
+        );
+        const data = await response.json();
+
+        if (data.data.isQualified) {
+          setUserData({
+            isMedicare: data.data.qualifiedFor[0],
+            isCreditDebt: data.data.qualifiedFor[1],
+            isDiscountedInsurence: data.data.qualifiedFor[2],
+            isComponsation: data.data.qualifiedFor[3],
+            isACA: data.data.qualifiedFor[4],
+            name: data.data.name,
+          });
+          setIsAlreadyQualified(true);
+        }
+      }
+    } catch (error) {
+      console.error('Error in storeUuid:', error);
+    }
   };
 
   const handleStartNow = () => {
@@ -27,9 +72,21 @@ const HomePage = ({navigation}) => {
     }, 1000);
     setTimeout(() => {
       setShowLoading(false);
-      navigation.navigate('ChatPage', {
-        uuid: uuid,
-      });
+      if (isAlreadyQualified) {
+        navigation.navigate('CongratulationsPage', {
+          isMedicare: userData.isMedicare,
+          isCreditDebt: userData.isCreditDebt,
+          isDiscountedInsurence: userData.isDiscountedInsurence,
+          isComponsation: userData.isComponsation,
+          isACA: userData.isACA,
+          name: userData.name,
+        });
+        return;
+      } else {
+        navigation.navigate('ChatPage', {
+          uuid: uuid,
+        });
+      }
     }, 4000);
   };
 
@@ -39,8 +96,7 @@ const HomePage = ({navigation}) => {
       setPeopleNumber(prevNumber => prevNumber + random);
     }, 2000);
 
-    const randomUuid = generateUniqueId();
-    setUuid(randomUuid);
+    storeUuid();
 
     return () => clearInterval(intervalId);
   }, []);

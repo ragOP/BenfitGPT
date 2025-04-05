@@ -7,9 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  Alert,
   StatusBar,
-  Platform,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
