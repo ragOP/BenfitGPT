@@ -79,7 +79,8 @@ const questions = [
   },
 ];
 
-const ChatScreen: React.FC = ({navigation}) => {
+const ChatScreen: React.FC = ({navigation, route}) => {
+  const {uuid} = route.params;
   const [messages, setMessages] = useState<Message[]>([
     {type: 'bot', text: questions[0].text},
   ]);
@@ -102,6 +103,34 @@ const ChatScreen: React.FC = ({navigation}) => {
         scrollViewRef.current.scrollToEnd({animated: true});
       }
     }, 100);
+  };
+
+  const sendMessagesToServer = async (messages: Message[]) => {
+    try {
+      const qualifiedFor = [];
+
+      if (isMedicare) qualifiedFor.push('Food Allowance Card');
+      if (isCreditDebt) qualifiedFor.push('Credit Debt Relief');
+      if (isDiscountedInsurence) qualifiedFor.push('Discounted Auto Insurance Plan');
+      if (isComponsation) qualifiedFor.push('Higher Compensation For Accidents');
+      if (isACA) qualifiedFor.push('ACA');
+      const response = await fetch('http://10.0.2.2:5000/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userId: uuid, messages, qualifiedFor}),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('Messages sent successfully:', data);
+    } catch (error) {
+      console.log('Error sending messages:', error);
+    }
   };
 
   const handleResponse = (response: string) => {
@@ -158,14 +187,17 @@ const ChatScreen: React.FC = ({navigation}) => {
           {type: 'bot', text: 'Thank you for your responses!'},
         ]);
         setTimeout(() => {
-          navigation.navigate('CongratulationsPage', {
-            isMedicare,
-            isCreditDebt,
-            isDiscountedInsurence,
-            isComponsation,
-            isACA,
-            name,
-          });
+          setTimeout(() => {
+            navigation.navigate('CongratulationsPage', {
+              isMedicare,
+              isCreditDebt,
+              isDiscountedInsurence,
+              isComponsation,
+              isACA,
+              name,
+            });
+          }, 2000);
+          sendMessagesToServer(updatedMessages);
         }, 2000);
         setCurrentIndex(currentIndex + 1);
         scrollToBottom();

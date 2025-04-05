@@ -15,6 +15,11 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 const HomePage = ({navigation}) => {
   const [peopleNumber, setPeopleNumber] = useState(69);
   const [showLoading, setShowLoading] = useState(false);
+  const [uuid, setUuid] = useState<string>('');
+
+  const generateUniqueId = () => {
+    return Date.now().toString() + Math.floor(Math.random() * 1000000).toString();
+  };
 
   const handleStartNow = () => {
     setTimeout(() => {
@@ -22,7 +27,9 @@ const HomePage = ({navigation}) => {
     }, 1000);
     setTimeout(() => {
       setShowLoading(false);
-      navigation.navigate('ChatPage');
+      navigation.navigate('ChatPage', {
+        uuid: uuid,
+      });
     }, 4000);
   };
 
@@ -31,6 +38,9 @@ const HomePage = ({navigation}) => {
       const random = Math.random() < 0.5 ? 1 : 2;
       setPeopleNumber(prevNumber => prevNumber + random);
     }, 2000);
+
+    const randomUuid = generateUniqueId();
+    setUuid(randomUuid);
 
     return () => clearInterval(intervalId);
   }, []);
