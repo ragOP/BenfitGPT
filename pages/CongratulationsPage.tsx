@@ -17,6 +17,7 @@ const CongratulationsPage = ({route}) => {
     isDiscountedInsurence,
     isComponsation,
     isACA,
+    name
   } = route.params;
   return (
     <SafeAreaView
@@ -39,7 +40,7 @@ const CongratulationsPage = ({route}) => {
         </View>
 
         <View style={styles.greenContainer}>
-          <Text style={styles.congratsText}>Congratulations, Aman Dev!</Text>
+          <Text style={styles.congratsText}>Congratulations, {name}!</Text>
           <Text style={styles.benefitText}>
             Here are the <Text style={styles.highlightText}>5</Text> Benefits
             You Qualify
@@ -83,7 +84,7 @@ const CongratulationsPage = ({route}) => {
         {isCreditDebt && (
           <>
             <View style={styles.redBanner}>
-              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+              <Text style={styles.redBannerText}>WORTH THE MOST $$</Text>
             </View>
 
             <View style={styles.cardContainer}>
@@ -115,7 +116,7 @@ const CongratulationsPage = ({route}) => {
         {isDiscountedInsurence && (
           <>
             <View style={styles.redBanner}>
-              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+              <Text style={styles.redBannerText}>MUST CLAIM!</Text>
             </View>
 
             <View style={styles.cardContainer}>
@@ -149,7 +150,7 @@ const CongratulationsPage = ({route}) => {
         {isComponsation && (
           <>
             <View style={styles.redBanner}>
-              <Text style={styles.redBannerText}>Easiest To Claim</Text>
+              <Text style={styles.redBannerText}>GET UPTO $100,000+!</Text>
             </View>
 
             <View style={styles.cardContainer}>

@@ -92,6 +92,7 @@ const ChatScreen: React.FC = ({navigation}) => {
     useState<boolean>(true);
   const [isComponsation, setIsComponsation] = useState<boolean>(true);
   const [isACA, setIsACA] = useState<boolean>(true);
+  const [name, setName] = useState<string>('');
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -116,6 +117,11 @@ const ChatScreen: React.FC = ({navigation}) => {
     } else if (questions[currentIndex].id === 10) {
       setIsCreditDebt(response === 'Yes');
     }
+
+    if (questions[currentIndex].id === 1) {
+      setName(response);
+    }
+
     setMessages(updatedMessages);
     setInputText('');
     scrollToBottom();
@@ -151,17 +157,16 @@ const ChatScreen: React.FC = ({navigation}) => {
           ...updatedMessages,
           {type: 'bot', text: 'Thank you for your responses!'},
         ]);
-        navigation.navigate('CongratulationsPage', {
-          isMedicare,
-          isCreditDebt,
-          isDiscountedInsurence,
-          isComponsation,
-          isACA,
-        });
-        Alert.alert(
-          'Summary',
-          `Credit Debt: ${isCreditDebt}, Discounted Insurance: ${isDiscountedInsurence}, Compensation: ${isComponsation}, ACA: ${isACA}`,
-        );
+        setTimeout(() => {
+          navigation.navigate('CongratulationsPage', {
+            isMedicare,
+            isCreditDebt,
+            isDiscountedInsurence,
+            isComponsation,
+            isACA,
+            name,
+          });
+        }, 2000);
         setCurrentIndex(currentIndex + 1);
         scrollToBottom();
       }, 3000);
