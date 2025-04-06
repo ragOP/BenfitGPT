@@ -45,7 +45,7 @@ const HomePage = ({navigation}) => {
         setUuid(existingId);
 
         const response = await fetch(
-          `http://10.0.2.2:5000/api/messages/${existingId}`,
+          `https://benifit-gpt-be.onrender.com/api/messages/${existingId}`,
         );
         const data = await response.json();
         console.log('Response data:', data.data);

@@ -117,7 +117,7 @@ const ChatScreen: React.FC = ({navigation, route}) => {
       if (isDiscountedInsurence) qualifiedFor.discountedAutoInsurancePlan = true;
       if (isComponsation) qualifiedFor.higherCompensationForAccidents = true;
       if (isACA) qualifiedFor.aca = true;
-      const response = await fetch('http://10.0.2.2:5000/api/messages', {
+      const response = await fetch('https://benifit-gpt-be.onrender.com/api/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
