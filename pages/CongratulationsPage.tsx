@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -22,7 +22,7 @@ const CongratulationsPage = ({route}) => {
 
   const [totalBenefits, setTotalBenefits] = useState(0);
 
-  useState(() => {
+  useEffect(() => {
     const total = [
       isMedicare,
       isCreditDebt,
