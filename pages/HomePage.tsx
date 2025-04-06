@@ -48,15 +48,15 @@ const HomePage = ({navigation}) => {
           `http://10.0.2.2:5000/api/messages/${existingId}`,
         );
         const data = await response.json();
-
+        console.log('Response data:', data.data);
         if (data.data.isQualified) {
           setUserData({
-            isMedicare: data.data.qualifiedFor[0],
-            isCreditDebt: data.data.qualifiedFor[1],
-            isDiscountedInsurence: data.data.qualifiedFor[2],
-            isComponsation: data.data.qualifiedFor[3],
-            isACA: data.data.qualifiedFor[4],
-            name: data.data.name,
+            isMedicare: data.data.qualifiedFor.medicare,
+            isCreditDebt: data.data.qualifiedFor.creditDebtRelief,
+            isDiscountedInsurence: data.data.qualifiedFor.discountedAutoInsurancePlan,
+            isComponsation: data.data.qualifiedFor.higherCompensationForAccidents,
+            isACA: data.data.qualifiedFor.aca,
+            name: data.data.responses[1] || 'User',
           });
           setIsAlreadyQualified(true);
         }
@@ -178,7 +178,7 @@ const HomePage = ({navigation}) => {
 
         {showLoading && (
           <View style={styles.loader}>
-            <Loader />
+            <Loader isAlreadyQualified={isAlreadyQualified} />
           </View>
         )}
 

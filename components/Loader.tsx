@@ -1,7 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import {StyleSheet, Animated} from 'react-native';
 
-const Loader = () => {
+interface LoaderProps {
+  isAlreadyQualified: boolean;
+}
+
+const Loader:React.FC<LoaderProps> = ({isAlreadyQualified}) => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
@@ -23,14 +27,14 @@ const Loader = () => {
 
   return (
     <Animated.Text style={[styles.title, {transform: [{scale: scaleAnim}]}]}>
-      Let's Start...
+      {isAlreadyQualified ? "Already qualified, redirecting...": "Let's Start..."}
     </Animated.Text>
   );
 };
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: '800',
     textAlign: 'center',
     marginVertical: 10,

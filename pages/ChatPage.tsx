@@ -105,13 +105,18 @@ const ChatScreen: React.FC = ({navigation, route}) => {
 
   const sendMessagesToServer = async (messages: Message[]) => {
     try {
-      const qualifiedFor = [];
-
-      if (isMedicare) qualifiedFor.push('Food Allowance Card');
-      if (isCreditDebt) qualifiedFor.push('Credit Debt Relief');
-      if (isDiscountedInsurence) qualifiedFor.push('Discounted Auto Insurance Plan');
-      if (isComponsation) qualifiedFor.push('Higher Compensation For Accidents');
-      if (isACA) qualifiedFor.push('ACA');
+      const qualifiedFor = {
+        medicare: false,
+        creditDebtRelief: false,
+        discountedAutoInsurancePlan: false,
+        higherCompensationForAccidents: false,
+        aca: false,
+      };
+      if (isMedicare) qualifiedFor.medicare = true;
+      if (isCreditDebt) qualifiedFor.creditDebtRelief = true;
+      if (isDiscountedInsurence) qualifiedFor.discountedAutoInsurancePlan = true;
+      if (isComponsation) qualifiedFor.higherCompensationForAccidents = true;
+      if (isACA) qualifiedFor.aca = true;
       const response = await fetch('http://10.0.2.2:5000/api/messages', {
         method: 'POST',
         headers: {

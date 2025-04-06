@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -19,6 +19,25 @@ const CongratulationsPage = ({route}) => {
     isACA,
     name
   } = route.params;
+
+  const [totalBenefits, setTotalBenefits] = useState(0);
+
+  useState(() => {
+    const total = [
+      isMedicare,
+      isCreditDebt,
+      isDiscountedInsurence,
+      isComponsation,
+      isACA,
+    ].filter((item) => item === true).length;
+    setTotalBenefits(total);
+  }, []);
+
+  // console.log('isMedicare:', isMedicare);
+  // console.log('isCreditDebt:', isCreditDebt);
+  // console.log('isDiscountedInsurence:', isDiscountedInsurence);
+  // console.log('isComponsation:', isComponsation);
+  // console.log('isACA:', isACA);
   return (
     <SafeAreaView
       style={{
@@ -42,7 +61,7 @@ const CongratulationsPage = ({route}) => {
         <View style={styles.greenContainer}>
           <Text style={styles.congratsText}>Congratulations, {name}!</Text>
           <Text style={styles.benefitText}>
-            Here are the <Text style={styles.highlightText}>5</Text> Benefits
+            Here are the <Text style={styles.highlightText}>{totalBenefits}</Text> Benefits
             You Qualify
           </Text>
           <Text style={styles.subText}>Go one by one!</Text>
