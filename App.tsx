@@ -7,6 +7,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import HomePage from './pages/HomePage';
 import CongratulationsPage from './pages/CongratulationsPage';
 import ChatPage from './pages/ChatPage';
+import NewChatPage from './pages/NewChatPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +17,7 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          component={HomePage}
+          component={NewChatPage}
           options={{headerShown: false}}
         />
         <Stack.Screen
