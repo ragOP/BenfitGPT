@@ -112,7 +112,7 @@ const HomePage = ({navigation}) => {
       />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../assets/logo.png')} style={styles.logo} />
+          <Image source={require('../assets/logo.webp')} style={styles.logo} />
         </View>
 
         <View style={styles.subHeader}>
@@ -134,7 +134,7 @@ const HomePage = ({navigation}) => {
             <View style={styles.listContainer}>
               <View style={styles.listImageContainer}>
                 <Image
-                  source={require('../assets/Tick.jpeg')}
+                  source={require('../assets/Tick.webp')}
                   style={styles.tickImage}
                 />
                 <Text style={styles.listItem}>
@@ -143,14 +143,14 @@ const HomePage = ({navigation}) => {
               </View>
               <View style={styles.listImageContainer}>
                 <Image
-                  source={require('../assets/Tick.jpeg')}
+                  source={require('../assets/Tick.webp')}
                   style={styles.tickImage}
                 />
                 <Text style={styles.listItem}>Completely Free & Easy.</Text>
               </View>
               <View style={styles.listImageContainer}>
                 <Image
-                  source={require('../assets/Tick.jpeg')}
+                  source={require('../assets/Tick.webp')}
                   style={styles.tickImage}
                 />
                 <Text style={styles.listItem}>
@@ -168,7 +168,7 @@ const HomePage = ({navigation}) => {
             </Text>
             <View style={styles.aiImageContainer}>
               <Image
-                source={require('../assets/Loader.jpeg')}
+                source={require('../assets/Loader.webp')}
                 style={styles.aiImage}
               />
               <Text style={styles.aiText}>Activating AI</Text>

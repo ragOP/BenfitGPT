@@ -224,7 +224,7 @@ const ChatScreen: React.FC = ({navigation, route}) => {
       />
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../assets/logo.png')} style={styles.logo} />
+          <Image source={require('../assets/logo.webp')} style={styles.logo} />
         </View>
         <View style={styles.subHeader}>
           <Text style={styles.subHeaderText}>
@@ -248,7 +248,7 @@ const ChatScreen: React.FC = ({navigation, route}) => {
               }>
               {msg.type === 'bot' && (
                 <Image
-                  source={require('../assets/bot.png')}
+                  source={require('../assets/bot.webp')}
                   style={styles.icon}
                 />
               )}

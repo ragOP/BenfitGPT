@@ -50,7 +50,7 @@ const CongratulationsPage = ({route}) => {
       />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../assets/logo.png')} style={styles.logo} />
+          <Image source={require('../assets/logo.webp')} style={styles.logo} />
         </View>
         <View style={styles.subHeader}>
           <Text style={styles.subHeaderText}>
@@ -78,7 +78,7 @@ const CongratulationsPage = ({route}) => {
                 <Text style={styles.boldText}>Food Allowance Card</Text>
               </Text>
               <Image
-                source={require('../assets/benifit1.jpeg')}
+                source={require('../assets/benifit1.webp')}
                 style={styles.cardImage}
               />
               <Text style={styles.cardDescription}>
@@ -111,7 +111,7 @@ const CongratulationsPage = ({route}) => {
                 <Text style={styles.boldText}>CREDIT CARD DEBT RELIEF</Text>
               </Text>
               <Image
-                source={require('../assets/benifit2.jpeg')}
+                source={require('../assets/benifit2.webp')}
                 style={styles.cardImage}
               />
               <Text style={styles.cardDescription}>
@@ -145,7 +145,7 @@ const CongratulationsPage = ({route}) => {
                 </Text>
               </Text>
               <Image
-                source={require('../assets/benifit3.jpeg')}
+                source={require('../assets/benifit3.webp')}
                 style={styles.cardImage}
               />
               <Text style={styles.cardDescription}>
@@ -179,7 +179,7 @@ const CongratulationsPage = ({route}) => {
                 </Text>
               </Text>
               <Image
-                source={require('../assets/benifit4.jpeg')}
+                source={require('../assets/benifit4.webp')}
                 style={styles.cardImage}
               />
               <Text style={styles.cardDescription}>
@@ -214,7 +214,7 @@ const CongratulationsPage = ({route}) => {
                 <Text style={styles.boldText}>ACA</Text>
               </Text>
               <Image
-                source={require('../assets/benifit1.jpeg')}
+                source={require('../assets/benifit1.webp')}
                 style={styles.cardImage}
               />
               <Text style={styles.cardDescription}>
